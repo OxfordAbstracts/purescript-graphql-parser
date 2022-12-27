@@ -456,9 +456,9 @@ instance PrintAst String where
   printAst a = a
 
 -- utils 
-
 printDescription :: Maybe String -> String
-printDescription = maybe "" tripleQuote
+printDescription (Just "") = ""
+printDescription s = maybe "" tripleQuote s
 
 tripleQuote :: String -> String
 tripleQuote s = q3 <> s <> q3
