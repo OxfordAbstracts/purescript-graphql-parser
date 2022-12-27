@@ -461,6 +461,6 @@ printDescription (Just "") = ""
 printDescription s = maybe "" tripleQuote s
 
 tripleQuote :: String -> String
-tripleQuote s = q3 <> s <> q3
+tripleQuote s = q3 <> s <> q3 <> "\n"
   where
   q3 = "\"\"\""
