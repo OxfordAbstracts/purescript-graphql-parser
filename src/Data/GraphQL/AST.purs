@@ -1,12 +1,14 @@
 module Data.GraphQL.AST where
 
-import Prim hiding (Type)
 import Prelude
+import Prim hiding (Type)
+
 import Data.Generic.Rep (class Generic)
-import Data.Show.Generic (genericShow)
+import Data.Hashable (class Hashable, hash)
 import Data.List (List)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
+import Data.Show.Generic (genericShow)
 import Data.Tuple (Tuple(..))
 
 derive instance documentGeneric ∷ Generic Document _
@@ -15,6 +17,8 @@ instance documentShow ∷ Show Document where
   show v = genericShow v
 
 derive instance documentEq ∷ Eq Document
+
+derive instance documentOrd ∷ Ord Document
 
 _Document ∷
   Tuple
@@ -40,6 +44,8 @@ instance definitionShow ∷ Show Definition where
   show v = genericShow v
 
 derive instance definitionEq ∷ Eq Definition
+
+derive instance definitionOrd ∷ Ord Definition
 
 _Definition_ExecutableDefinition ∷
   Tuple
@@ -95,6 +101,8 @@ instance executableDefinitionShow ∷ Show ExecutableDefinition where
 
 derive instance executableDefinitionEq ∷ Eq ExecutableDefinition
 
+derive instance executableDefinitionOrd ∷ Ord ExecutableDefinition
+
 _ExecutableDefinition_OperationDefinition ∷
   Tuple
     ( OperationDefinition → ExecutableDefinition
@@ -133,6 +141,8 @@ instance operationDefinitionShow ∷ Show OperationDefinition where
   show v = genericShow v
 
 derive instance operationDefinitionEq ∷ Eq OperationDefinition
+
+derive instance operationDefinitionOrd ∷ Ord OperationDefinition
 
 _OperationDefinition_SelectionSet ∷
   Tuple
@@ -175,6 +185,8 @@ instance operationTypeShow ∷ Show OperationType where
   show v = genericShow v
 
 derive instance operationTypeEq ∷ Eq OperationType
+
+derive instance operationTypeOrd ∷ Ord OperationType
 
 _Query ∷
   Tuple
@@ -230,6 +242,8 @@ instance selectionSetShow ∷ Show SelectionSet where
 
 derive instance selectionSetEq ∷ Eq SelectionSet
 
+derive instance selectionSetOrd ∷ Ord SelectionSet
+
 _SelectionSet ∷
   Tuple
     ( (List Selection) → SelectionSet
@@ -254,6 +268,8 @@ instance selectionShow ∷ Show Selection where
   show v = genericShow v
 
 derive instance selectionEq ∷ Eq Selection
+
+derive instance selectionOrd ∷ Ord Selection
 
 _Selection_Field ∷
   Tuple
@@ -309,6 +325,8 @@ instance fieldShow ∷ Show Field where
 
 derive instance fieldEq ∷ Eq Field
 
+derive instance fieldOrd ∷ Ord Field
+
 type T_Field
   = { alias ∷ (Maybe String), name ∷ String, arguments ∷ (Maybe Arguments), directives ∷ (Maybe Directives), selectionSet ∷ (Maybe SelectionSet) }
 
@@ -337,6 +355,10 @@ instance argumentsShow ∷ Show Arguments where
 
 derive instance argumentsEq ∷ Eq Arguments
 
+derive instance argumentsOrd ∷ Ord Arguments
+
+derive newtype instance Hashable Arguments 
+
 _Arguments ∷
   Tuple
     ( (List Argument) → Arguments
@@ -362,6 +384,12 @@ instance argumentShow ∷ Show Argument where
 
 derive instance argumentEq ∷ Eq Argument
 
+derive instance argumentOrd ∷ Ord Argument
+
+derive instance Newtype Argument _
+
+derive newtype instance Hashable Argument
+
 type T_Argument
   = { name :: String, value :: Value }
 
@@ -378,8 +406,6 @@ _Argument =
         Argument a → Just a
     )
 
-derive instance argumentNewtype ∷ Newtype Argument _
-
 newtype Argument
   = Argument T_Argument
 
@@ -389,6 +415,8 @@ instance fragmentSpreadShow ∷ Show FragmentSpread where
   show v = genericShow v
 
 derive instance fragmentSpreadEq ∷ Eq FragmentSpread
+
+derive instance fragmentSpreadOrd ∷ Ord FragmentSpread
 
 type T_FragmentSpread
   = { fragmentName ∷ String, directives ∷ Maybe Directives }
@@ -418,6 +446,8 @@ instance inlineFragmentShow ∷ Show InlineFragment where
 
 derive instance inlineFragmentEq ∷ Eq InlineFragment
 
+derive instance inlineFragmentOrd ∷ Ord InlineFragment
+
 type T_InlineFragment
   = { typeCondition ∷ (Maybe TypeCondition), directives ∷ (Maybe Directives), selectionSet ∷ SelectionSet }
 
@@ -445,6 +475,8 @@ instance fragmentDefinitionShow ∷ Show FragmentDefinition where
   show v = genericShow v
 
 derive instance fragmentDefinitionEq ∷ Eq FragmentDefinition
+
+derive instance fragmentDefinitionOrd ∷ Ord FragmentDefinition
 
 type T_FragmentDefinition
   = { fragmentName ∷ String, typeCondition ∷ TypeCondition, directives ∷ (Maybe Directives), selectionSet ∷ SelectionSet }
@@ -474,6 +506,8 @@ instance typeConditionShow ∷ Show TypeCondition where
 
 derive instance typeConditionEq ∷ Eq TypeCondition
 
+derive instance typeConditionOrd ∷ Ord TypeCondition
+
 _TypeCondition ∷
   Tuple
     ( NamedType → TypeCondition
@@ -498,6 +532,11 @@ instance valueShow ∷ Show Value where
   show v = genericShow v
 
 derive instance valueEq ∷ Eq Value
+
+derive instance valueOrd ∷ Ord Value
+
+instance Hashable Value where 
+  hash = show >>> hash
 
 _Value_Variable ∷
   Tuple
@@ -643,6 +682,8 @@ instance intValueShow ∷ Show IntValue where
 
 derive instance intValueEq ∷ Eq IntValue
 
+derive instance intValueOrd ∷ Ord IntValue
+
 _IntValue ∷
   Tuple
     ( Int → IntValue
@@ -667,6 +708,8 @@ instance floatValueShow ∷ Show FloatValue where
   show v = genericShow v
 
 derive instance floatValueEq ∷ Eq FloatValue
+
+derive instance floatValueOrd ∷ Ord FloatValue
 
 _FloatValue ∷
   Tuple
@@ -693,6 +736,8 @@ instance booleanValueShow ∷ Show BooleanValue where
 
 derive instance booleanValueEq ∷ Eq BooleanValue
 
+derive instance booleanValueOrd ∷ Ord BooleanValue
+
 _BooleanValue ∷
   Tuple
     ( Boolean → BooleanValue
@@ -717,6 +762,8 @@ instance stringValueShow ∷ Show StringValue where
   show v = genericShow v
 
 derive instance stringValueEq ∷ Eq StringValue
+
+derive instance stringValueOrd ∷ Ord StringValue
 
 _StringValue ∷
   Tuple
@@ -743,6 +790,8 @@ instance nullValueShow ∷ Show NullValue where
 
 derive instance nullValueEq ∷ Eq NullValue
 
+derive instance nullValueOrd ∷ Ord NullValue
+
 _NullValue ∷
   Tuple
     ( Unit → NullValue
@@ -765,6 +814,8 @@ instance enumValueShow ∷ Show EnumValue where
   show v = genericShow v
 
 derive instance enumValueEq ∷ Eq EnumValue
+
+derive instance enumValueOrd ∷ Ord EnumValue
 
 _EnumValue ∷
   Tuple
@@ -791,6 +842,8 @@ instance listValueShow ∷ Show ListValue where
 
 derive instance listValueEq ∷ Eq ListValue
 
+derive instance listValueOrd ∷ Ord ListValue
+
 _ListValue ∷
   Tuple
     ( (List Value) → ListValue
@@ -815,6 +868,8 @@ instance objectValueShow ∷ Show ObjectValue where
   show v = genericShow v
 
 derive instance objectValueEq ∷ Eq ObjectValue
+
+derive instance objectValueOrd ∷ Ord ObjectValue
 
 _ObjectValue ∷
   Tuple
@@ -841,6 +896,8 @@ instance variableDefinitionsShow ∷ Show VariableDefinitions where
 
 derive instance variableDefinitionsEq ∷ Eq VariableDefinitions
 
+derive instance variableDefinitionsOrd ∷ Ord VariableDefinitions
+
 _VariableDefinitions ∷
   Tuple
     ( (List VariableDefinition) → VariableDefinitions
@@ -865,6 +922,8 @@ instance variableDefinitionShow ∷ Show VariableDefinition where
   show v = genericShow v
 
 derive instance variableDefinitionEq ∷ Eq VariableDefinition
+
+derive instance variableDefinitionOrd ∷ Ord VariableDefinition
 
 type T_VariableDefinition
   = { variable ∷ Variable, type ∷ Type, defaultValue ∷ (Maybe DefaultValue) }
@@ -894,6 +953,8 @@ instance variableShow ∷ Show Variable where
 
 derive instance variableEq ∷ Eq Variable
 
+derive instance variableOrd ∷ Ord Variable
+
 _Variable ∷
   Tuple
     ( String → Variable
@@ -919,6 +980,8 @@ instance defaultValueShow ∷ Show DefaultValue where
 
 derive instance defaultValueEq ∷ Eq DefaultValue
 
+derive instance defaultValueOrd ∷ Ord DefaultValue
+
 _DefaultValue ∷
   Tuple
     ( Value → DefaultValue
@@ -943,6 +1006,8 @@ instance typeShow ∷ Show Type where
   show v = genericShow v
 
 derive instance typeEq ∷ Eq Type
+
+derive instance typeOrd ∷ Ord Type
 
 _Type_NamedType ∷
   Tuple
@@ -998,6 +1063,8 @@ instance namedTypeShow ∷ Show NamedType where
 
 derive instance namedTypeEq ∷ Eq NamedType
 
+derive instance namedTypeOrd ∷ Ord NamedType
+
 _NamedType ∷
   Tuple
     ( String → NamedType
@@ -1023,6 +1090,8 @@ instance listTypeShow ∷ Show ListType where
 
 derive instance listTypeEq ∷ Eq ListType
 
+derive instance listTypeOrd ∷ Ord ListType
+
 _ListType ∷
   Tuple
     ( Type → ListType
@@ -1047,6 +1116,8 @@ instance nonNullTypeShow ∷ Show NonNullType where
   show v = genericShow v
 
 derive instance nonNullTypeEq ∷ Eq NonNullType
+
+derive instance nonNullTypeOrd ∷ Ord NonNullType
 
 _NonNullType_NamedType ∷
   Tuple
@@ -1087,6 +1158,8 @@ instance directivesShow ∷ Show Directives where
 
 derive instance directivesEq ∷ Eq Directives
 
+derive instance directivesOrd ∷ Ord Directives
+
 _Directives ∷
   Tuple
     ( (List Directive) → Directives
@@ -1111,6 +1184,8 @@ instance directiveShow ∷ Show Directive where
   show v = genericShow v
 
 derive instance directiveEq ∷ Eq Directive
+
+derive instance directiveOrd ∷ Ord Directive
 
 type T_Directive
   = { name ∷ String, arguments ∷ (Maybe Arguments) }
@@ -1139,6 +1214,8 @@ instance typeSystemDefinitionShow ∷ Show TypeSystemDefinition where
   show v = genericShow v
 
 derive instance typeSystemDefinitionEq ∷ Eq TypeSystemDefinition
+
+derive instance typeSystemDefinitionOrd ∷ Ord TypeSystemDefinition
 
 _TypeSystemDefinition_SchemaDefinition ∷
   Tuple
@@ -1194,6 +1271,8 @@ instance typeSystemExtensionShow ∷ Show TypeSystemExtension where
 
 derive instance typeSystemExtensionEq ∷ Eq TypeSystemExtension
 
+derive instance typeSystemExtensionOrd ∷ Ord TypeSystemExtension
+
 _TypeSystemExtension_SchemaExtension ∷
   Tuple
     ( SchemaExtension → TypeSystemExtension
@@ -1233,6 +1312,8 @@ instance schemaDefinitionShow ∷ Show SchemaDefinition where
 
 derive instance schemaDefinitionEq ∷ Eq SchemaDefinition
 
+derive instance schemaDefinitionOrd ∷ Ord SchemaDefinition
+
 type T_SchemaDefinition
   = { directives ∷ (Maybe Directives), rootOperationTypeDefinition ∷ (List RootOperationTypeDefinition) }
 
@@ -1261,6 +1342,8 @@ instance rootOperationTypeDefinitionShow ∷ Show RootOperationTypeDefinition wh
 
 derive instance rootOperationTypeDefinitionEq ∷ Eq RootOperationTypeDefinition
 
+derive instance rootOperationTypeDefinitionOrd ∷ Ord RootOperationTypeDefinition
+
 type T_RootOperationTypeDefinition
   = { operationType ∷ OperationType, namedType ∷ NamedType }
 
@@ -1288,6 +1371,8 @@ instance schemaExtensionShow ∷ Show SchemaExtension where
   show v = genericShow v
 
 derive instance schemaExtensionEq ∷ Eq SchemaExtension
+
+derive instance schemaExtensionOrd ∷ Ord SchemaExtension
 
 type T_SchemaExtension_With_OperationTypeDefinition
   = { directives ∷ (Maybe Directives), operationTypesDefinition ∷ (List OperationTypeDefinition) }
@@ -1334,6 +1419,8 @@ instance operationTypeDefinitionShow ∷ Show OperationTypeDefinition where
 
 derive instance operationTypeDefinitionEq ∷ Eq OperationTypeDefinition
 
+derive instance operationTypeDefinitionOrd ∷ Ord OperationTypeDefinition
+
 type T_OperationTypeDefinition
   = { operationType ∷ OperationType, namedType ∷ NamedType }
 
@@ -1361,6 +1448,8 @@ instance typeDefinitionShow ∷ Show TypeDefinition where
   show v = genericShow v
 
 derive instance typeDefinitionEq ∷ Eq TypeDefinition
+
+derive instance typeDefinitionOrd ∷ Ord TypeDefinition
 
 _TypeDefinition_ScalarTypeDefinition ∷
   Tuple
@@ -1461,6 +1550,8 @@ instance typeExtensionShow ∷ Show TypeExtension where
 
 derive instance typeExtensionEq ∷ Eq TypeExtension
 
+derive instance typeExtensionOrd ∷ Ord TypeExtension
+
 _TypeExtension_ScalarTypeExtension ∷
   Tuple
     ( ScalarTypeExtension → TypeExtension
@@ -1560,6 +1651,8 @@ instance scalarTypeDefinitionShow ∷ Show ScalarTypeDefinition where
 
 derive instance scalarTypeDefinitionEq ∷ Eq ScalarTypeDefinition
 
+derive instance scalarTypeDefinitionOrd ∷ Ord ScalarTypeDefinition
+
 type T_ScalarTypeDefinition
   = { description ∷ (Maybe String), name ∷ String, directives ∷ (Maybe Directives) }
 
@@ -1587,6 +1680,8 @@ instance scalarTypeExtensionShow ∷ Show ScalarTypeExtension where
   show v = genericShow v
 
 derive instance scalarTypeExtensionEq ∷ Eq ScalarTypeExtension
+
+derive instance scalarTypeExtensionOrd ∷ Ord ScalarTypeExtension
 
 type T_ScalarTypeExtension
   = { name ∷ String, directives ∷ Directives }
@@ -1616,6 +1711,8 @@ instance objectTypeDefinitionShow ∷ Show ObjectTypeDefinition where
 
 derive instance objectTypeDefinitionEq ∷ Eq ObjectTypeDefinition
 
+derive instance objectTypeDefinitionOrd ∷ Ord ObjectTypeDefinition
+
 type T_ObjectTypeDefinition
   = { description ∷ (Maybe String), name ∷ String, implementsInterfaces ∷ (Maybe ImplementsInterfaces), directives ∷ (Maybe Directives), fieldsDefinition ∷ (Maybe FieldsDefinition) }
 
@@ -1643,6 +1740,8 @@ instance objectTypeExtensionShow ∷ Show ObjectTypeExtension where
   show v = genericShow v
 
 derive instance objectTypeExtensionEq ∷ Eq ObjectTypeExtension
+
+derive instance objectTypeExtensionOrd ∷ Ord ObjectTypeExtension
 
 type T_ObjectTypeExtension_With_FieldsDefinition
   = { name ∷ String, implementsInterfaces ∷ (Maybe ImplementsInterfaces), directives ∷ (Maybe Directives), fieldsDefinition ∷ FieldsDefinition }
@@ -1707,6 +1806,8 @@ instance implementsInterfacesShow ∷ Show ImplementsInterfaces where
 
 derive instance implementsInterfacesEq ∷ Eq ImplementsInterfaces
 
+derive instance implementsInterfacesOrd ∷ Ord ImplementsInterfaces
+
 _ImplementsInterfaces ∷
   Tuple
     ( (List NamedType) → ImplementsInterfaces
@@ -1732,6 +1833,8 @@ instance fieldsDefinitionShow ∷ Show FieldsDefinition where
 
 derive instance fieldsDefinitionEq ∷ Eq FieldsDefinition
 
+derive instance fieldsDefinitionOrd ∷ Ord FieldsDefinition
+
 _FieldsDefinition ∷
   Tuple
     ( (List FieldDefinition) → FieldsDefinition
@@ -1756,6 +1859,8 @@ instance fieldDefinitionShow ∷ Show FieldDefinition where
   show v = genericShow v
 
 derive instance fieldDefinitionEq ∷ Eq FieldDefinition
+
+derive instance fieldDefinitionOrd ∷ Ord FieldDefinition
 
 type T_FieldDefinition
   = { description ∷ (Maybe String), name ∷ String, argumentsDefinition ∷ (Maybe ArgumentsDefinition), type ∷ Type, directives ∷ (Maybe Directives) }
@@ -1785,6 +1890,8 @@ instance argumentsDefinitionShow ∷ Show ArgumentsDefinition where
 
 derive instance argumentsDefinitionEq ∷ Eq ArgumentsDefinition
 
+derive instance argumentsDefinitionOrd ∷ Ord ArgumentsDefinition
+
 _ArgumentsDefinition ∷
   Tuple
     ( (List InputValueDefinition) → ArgumentsDefinition
@@ -1809,6 +1916,8 @@ instance inputValueDefinitionShow ∷ Show InputValueDefinition where
   show v = genericShow v
 
 derive instance inputValueDefinitionEq ∷ Eq InputValueDefinition
+
+derive instance inputValueDefinitionOrd ∷ Ord InputValueDefinition
 
 type T_InputValueDefinition
   = { description ∷ (Maybe String), name ∷ String, type ∷ Type, defaultValue ∷ (Maybe DefaultValue), directives ∷ (Maybe Directives) }
@@ -1838,6 +1947,8 @@ instance interfaceTypeDefinitionShow ∷ Show InterfaceTypeDefinition where
 
 derive instance interfaceTypeDefinitionEq ∷ Eq InterfaceTypeDefinition
 
+derive instance interfaceTypeDefinitionOrd ∷ Ord InterfaceTypeDefinition
+
 type T_InterfaceTypeDefinition
   = { description ∷ (Maybe String), name ∷ String, directives ∷ (Maybe Directives), fieldsDefinition ∷ (Maybe FieldsDefinition) }
 
@@ -1865,6 +1976,8 @@ instance interfaceTypeExtensionShow ∷ Show InterfaceTypeExtension where
   show v = genericShow v
 
 derive instance interfaceTypeExtensionEq ∷ Eq InterfaceTypeExtension
+
+derive instance interfaceTypeExtensionOrd ∷ Ord InterfaceTypeExtension
 
 type T_InterfaceTypeExtension_With_FieldsDefinition
   = { name ∷ String, directives ∷ (Maybe Directives), fieldsDefinition ∷ FieldsDefinition }
@@ -1911,6 +2024,8 @@ instance unionTypeDefinitionShow ∷ Show UnionTypeDefinition where
 
 derive instance unionTypeDefinitionEq ∷ Eq UnionTypeDefinition
 
+derive instance unionTypeDefinitionOrd ∷ Ord UnionTypeDefinition
+
 type T_UnionTypeDefinition
   = { description ∷ Maybe String, name ∷ String, directives ∷ (Maybe Directives), unionMemberTypes ∷ (Maybe UnionMemberTypes) }
 
@@ -1939,6 +2054,8 @@ instance unionMemberTypesShow ∷ Show UnionMemberTypes where
 
 derive instance unionMemberTypesEq ∷ Eq UnionMemberTypes
 
+derive instance unionMemberTypesOrd ∷ Ord UnionMemberTypes
+
 _UnionMemberTypes ∷
   Tuple
     ( (List NamedType) → UnionMemberTypes
@@ -1963,6 +2080,8 @@ instance unionTypeExtensionShow ∷ Show UnionTypeExtension where
   show v = genericShow v
 
 derive instance unionTypeExtensionEq ∷ Eq UnionTypeExtension
+
+derive instance unionTypeExtensionOrd ∷ Ord UnionTypeExtension
 
 type T_UnionTypeExtension_With_UnionMemberTypes
   = { name ∷ String, directives ∷ (Maybe Directives), unionMemberTypes ∷ UnionMemberTypes }
@@ -2009,6 +2128,8 @@ instance enumTypeDefinitionShow ∷ Show EnumTypeDefinition where
 
 derive instance enumTypeDefinitionEq ∷ Eq EnumTypeDefinition
 
+derive instance enumTypeDefinitionOrd ∷ Ord EnumTypeDefinition
+
 type T_EnumTypeDefinition
   = { description ∷ (Maybe String), name ∷ String, directives ∷ (Maybe Directives), enumValuesDefinition ∷ (Maybe EnumValuesDefinition) }
 
@@ -2037,6 +2158,8 @@ instance enumValuesDefinitionShow ∷ Show EnumValuesDefinition where
 
 derive instance enumValuesDefinitionEq ∷ Eq EnumValuesDefinition
 
+derive instance enumValuesDefinitionOrd ∷ Ord EnumValuesDefinition
+
 _EnumValuesDefinition ∷
   Tuple
     ( (List EnumValueDefinition) → EnumValuesDefinition
@@ -2061,6 +2184,8 @@ instance enumValueDefinitionShow ∷ Show EnumValueDefinition where
   show v = genericShow v
 
 derive instance enumValueDefinitionEq ∷ Eq EnumValueDefinition
+
+derive instance enumValueDefinitionOrd ∷ Ord EnumValueDefinition
 
 type T_EnumValueDefinition
   = { description ∷ (Maybe String), enumValue ∷ EnumValue, directives ∷ (Maybe Directives) }
@@ -2089,6 +2214,8 @@ instance enumTypeExtensionShow ∷ Show EnumTypeExtension where
   show v = genericShow v
 
 derive instance enumTypeExtensionEq ∷ Eq EnumTypeExtension
+
+derive instance enumTypeExtensionOrd ∷ Ord EnumTypeExtension
 
 type T_EnumTypeExtension_With_EnumValuesDefinition
   = { name ∷ String, directives ∷ (Maybe Directives), enumValuesDefinition ∷ EnumValuesDefinition }
@@ -2135,6 +2262,8 @@ instance inputObjectTypeDefinitionShow ∷ Show InputObjectTypeDefinition where
 
 derive instance inputObjectTypeDefinitionEq ∷ Eq InputObjectTypeDefinition
 
+derive instance inputObjectTypeDefinitionOrd ∷ Ord InputObjectTypeDefinition
+
 type T_InputObjectTypeDefinition
   = { description ∷ (Maybe String), name ∷ String, directives ∷ (Maybe Directives), inputFieldsDefinition ∷ (Maybe InputFieldsDefinition) }
 
@@ -2163,6 +2292,8 @@ instance inputFieldsDefinitionShow ∷ Show InputFieldsDefinition where
 
 derive instance inputFieldsDefinitionEq ∷ Eq InputFieldsDefinition
 
+derive instance inputFieldsDefinitionOrd ∷ Ord InputFieldsDefinition
+
 _InputFieldsDefinition ∷
   Tuple
     ( (List InputValueDefinition) → InputFieldsDefinition
@@ -2187,6 +2318,8 @@ instance inputObjectTypeExtensionShow ∷ Show InputObjectTypeExtension where
   show v = genericShow v
 
 derive instance inputObjectTypeExtensionEq ∷ Eq InputObjectTypeExtension
+
+derive instance inputObjectTypeExtensionOrd ∷ Ord InputObjectTypeExtension
 
 type T_InputObjectTypeExtension_With_InputFieldsDefinition
   = { name ∷ String, directives ∷ (Maybe Directives), inputFieldsDefinition ∷ InputFieldsDefinition }
@@ -2233,6 +2366,8 @@ instance directiveDefinitionShow ∷ Show DirectiveDefinition where
 
 derive instance directiveDefinitionEq ∷ Eq DirectiveDefinition
 
+derive instance directiveDefinitionOrd ∷ Ord DirectiveDefinition
+
 type T_DirectiveDefinition
   = { description ∷ (Maybe String), name ∷ String, argumentsDefinition ∷ (Maybe ArgumentsDefinition), directiveLocations ∷ DirectiveLocations }
 
@@ -2261,6 +2396,8 @@ instance directiveLocationsShow ∷ Show DirectiveLocations where
 
 derive instance directiveLocationsEq ∷ Eq DirectiveLocations
 
+derive instance directiveLocationsOrd ∷ Ord DirectiveLocations
+
 _DirectiveLocations ∷
   Tuple
     ( (List DirectiveLocation) → DirectiveLocations
@@ -2285,6 +2422,8 @@ instance directiveLocationShow ∷ Show DirectiveLocation where
   show v = genericShow v
 
 derive instance directiveLocationEq ∷ Eq DirectiveLocation
+
+derive instance directiveLocationOrd ∷ Ord DirectiveLocation
 
 _DirectiveLocation_ExecutableDirectiveLocation ∷
   Tuple
@@ -2324,6 +2463,8 @@ instance executableDirectiveLocationShow ∷ Show ExecutableDirectiveLocation wh
   show v = genericShow v
 
 derive instance executableDirectiveLocationEq ∷ Eq ExecutableDirectiveLocation
+
+derive instance executableDirectiveLocationOrd ∷ Ord ExecutableDirectiveLocation
 
 _QUERY ∷
   Tuple
@@ -2438,6 +2579,8 @@ instance typeSystemDirectiveLocationShow ∷ Show TypeSystemDirectiveLocation wh
   show v = genericShow v
 
 derive instance typeSystemDirectiveLocationEq ∷ Eq TypeSystemDirectiveLocation
+
+derive instance typeSystemDirectiveLocationOrd ∷ Ord TypeSystemDirectiveLocation
 
 _SCHEMA ∷
   Tuple
