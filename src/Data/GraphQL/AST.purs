@@ -3,6 +3,10 @@ module Data.GraphQL.AST where
 import Prelude
 import Prim hiding (Type)
 
+import Data.Argonaut.Decode (class DecodeJson)
+import Data.Argonaut.Decode.Generic (genericDecodeJson)
+import Data.Argonaut.Encode (class EncodeJson)
+import Data.Argonaut.Encode.Generic (genericEncodeJson)
 import Data.Generic.Rep (class Generic)
 import Data.Hashable (class Hashable, hash)
 import Data.List (List)
@@ -15,6 +19,12 @@ derive instance documentGeneric ∷ Generic Document _
 
 instance documentShow ∷ Show Document where
   show v = genericShow v
+
+instance EncodeJson Document where 
+  encodeJson a = genericEncodeJson a
+
+instance DecodeJson Document where 
+  decodeJson a = genericDecodeJson a
 
 derive instance documentEq ∷ Eq Document
 
@@ -42,6 +52,12 @@ derive instance definitionGeneric ∷ Generic Definition _
 
 instance definitionShow ∷ Show Definition where
   show v = genericShow v
+
+instance EncodeJson Definition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson Definition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance definitionEq ∷ Eq Definition
 
@@ -99,6 +115,12 @@ derive instance executableDefinitionGeneric ∷ Generic ExecutableDefinition _
 instance executableDefinitionShow ∷ Show ExecutableDefinition where
   show v = genericShow v
 
+instance EncodeJson ExecutableDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ExecutableDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance executableDefinitionEq ∷ Eq ExecutableDefinition
 
 derive instance executableDefinitionOrd ∷ Ord ExecutableDefinition
@@ -139,6 +161,12 @@ derive instance operationDefinitionGeneric ∷ Generic OperationDefinition _
 
 instance operationDefinitionShow ∷ Show OperationDefinition where
   show v = genericShow v
+
+instance EncodeJson OperationDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson OperationDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance operationDefinitionEq ∷ Eq OperationDefinition
 
@@ -183,6 +211,12 @@ derive instance operationTypeGeneric ∷ Generic OperationType _
 
 instance operationTypeShow ∷ Show OperationType where
   show v = genericShow v
+
+instance EncodeJson OperationType where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson OperationType where 
+  decodeJson a = genericDecodeJson a
 
 derive instance operationTypeEq ∷ Eq OperationType
 
@@ -240,6 +274,12 @@ derive instance selectionSetGeneric ∷ Generic SelectionSet _
 instance selectionSetShow ∷ Show SelectionSet where
   show v = genericShow v
 
+instance EncodeJson SelectionSet where 
+  encodeJson a = genericEncodeJson a
+
+instance DecodeJson SelectionSet where 
+  decodeJson a = genericDecodeJson a
+
 derive instance selectionSetEq ∷ Eq SelectionSet
 
 derive instance selectionSetOrd ∷ Ord SelectionSet
@@ -266,6 +306,12 @@ derive instance selectionGeneric ∷ Generic Selection _
 
 instance selectionShow ∷ Show Selection where
   show v = genericShow v
+
+instance EncodeJson Selection where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson Selection where 
+  decodeJson a = genericDecodeJson a
 
 derive instance selectionEq ∷ Eq Selection
 
@@ -323,6 +369,12 @@ derive instance fieldGeneric ∷ Generic Field _
 instance fieldShow ∷ Show Field where
   show v = genericShow v
 
+instance EncodeJson Field where 
+  encodeJson a = genericEncodeJson a
+  
+instance DecodeJson Field where 
+  decodeJson a = genericDecodeJson a
+
 derive instance fieldEq ∷ Eq Field
 
 derive instance fieldOrd ∷ Ord Field
@@ -353,6 +405,12 @@ derive instance argumentsGeneric ∷ Generic Arguments _
 instance argumentsShow ∷ Show Arguments where
   show v = genericShow v
 
+instance EncodeJson Arguments where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson Arguments where 
+  decodeJson a = genericDecodeJson a
+
 derive instance argumentsEq ∷ Eq Arguments
 
 derive instance argumentsOrd ∷ Ord Arguments
@@ -381,6 +439,12 @@ derive instance argumentGeneric ∷ Generic Argument _
 
 instance argumentShow ∷ Show Argument where
   show v = genericShow v
+
+instance EncodeJson Argument where 
+  encodeJson a = genericEncodeJson a
+
+instance DecodeJson Argument where 
+  decodeJson a = genericDecodeJson a
 
 derive instance argumentEq ∷ Eq Argument
 
@@ -414,6 +478,12 @@ derive instance fragmentSpreadGeneric ∷ Generic FragmentSpread _
 instance fragmentSpreadShow ∷ Show FragmentSpread where
   show v = genericShow v
 
+instance EncodeJson FragmentSpread where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson FragmentSpread where 
+  decodeJson a = genericDecodeJson a
+
 derive instance fragmentSpreadEq ∷ Eq FragmentSpread
 
 derive instance fragmentSpreadOrd ∷ Ord FragmentSpread
@@ -443,6 +513,12 @@ derive instance inlineFragmentGeneric ∷ Generic InlineFragment _
 
 instance inlineFragmentShow ∷ Show InlineFragment where
   show v = genericShow v
+
+instance EncodeJson InlineFragment where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InlineFragment where 
+  decodeJson a = genericDecodeJson a
 
 derive instance inlineFragmentEq ∷ Eq InlineFragment
 
@@ -474,6 +550,12 @@ derive instance fragmentDefinitionGeneric ∷ Generic FragmentDefinition _
 instance fragmentDefinitionShow ∷ Show FragmentDefinition where
   show v = genericShow v
 
+instance EncodeJson FragmentDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson FragmentDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance fragmentDefinitionEq ∷ Eq FragmentDefinition
 
 derive instance fragmentDefinitionOrd ∷ Ord FragmentDefinition
@@ -504,6 +586,12 @@ derive instance typeConditionGeneric ∷ Generic TypeCondition _
 instance typeConditionShow ∷ Show TypeCondition where
   show v = genericShow v
 
+instance EncodeJson TypeCondition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson TypeCondition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance typeConditionEq ∷ Eq TypeCondition
 
 derive instance typeConditionOrd ∷ Ord TypeCondition
@@ -530,6 +618,12 @@ derive instance valueGeneric ∷ Generic Value _
 
 instance valueShow ∷ Show Value where
   show v = genericShow v
+
+instance EncodeJson Value where 
+  encodeJson a = genericEncodeJson a
+  
+instance DecodeJson Value where 
+  decodeJson a = genericDecodeJson a
 
 derive instance valueEq ∷ Eq Value
 
@@ -680,6 +774,12 @@ derive instance intValueGeneric ∷ Generic IntValue _
 instance intValueShow ∷ Show IntValue where
   show v = genericShow v
 
+instance EncodeJson IntValue where 
+  encodeJson a = genericEncodeJson a
+
+instance DecodeJson IntValue where 
+  decodeJson a = genericDecodeJson a
+
 derive instance intValueEq ∷ Eq IntValue
 
 derive instance intValueOrd ∷ Ord IntValue
@@ -706,6 +806,12 @@ derive instance floatValueGeneric ∷ Generic FloatValue _
 
 instance floatValueShow ∷ Show FloatValue where
   show v = genericShow v
+
+instance EncodeJson FloatValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson FloatValue where 
+  decodeJson a = genericDecodeJson a
 
 derive instance floatValueEq ∷ Eq FloatValue
 
@@ -734,6 +840,12 @@ derive instance booleanValueGeneric ∷ Generic BooleanValue _
 instance booleanValueShow ∷ Show BooleanValue where
   show v = genericShow v
 
+instance EncodeJson BooleanValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson BooleanValue where 
+  decodeJson a = genericDecodeJson a
+
 derive instance booleanValueEq ∷ Eq BooleanValue
 
 derive instance booleanValueOrd ∷ Ord BooleanValue
@@ -760,6 +872,12 @@ derive instance stringValueGeneric ∷ Generic StringValue _
 
 instance stringValueShow ∷ Show StringValue where
   show v = genericShow v
+
+instance EncodeJson StringValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson StringValue where 
+  decodeJson a = genericDecodeJson a
 
 derive instance stringValueEq ∷ Eq StringValue
 
@@ -788,6 +906,12 @@ derive instance nullValueGeneric ∷ Generic NullValue _
 instance nullValueShow ∷ Show NullValue where
   show v = genericShow v
 
+instance EncodeJson NullValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson NullValue where 
+  decodeJson a = genericDecodeJson a
+
 derive instance nullValueEq ∷ Eq NullValue
 
 derive instance nullValueOrd ∷ Ord NullValue
@@ -812,6 +936,12 @@ derive instance enumValueGeneric ∷ Generic EnumValue _
 
 instance enumValueShow ∷ Show EnumValue where
   show v = genericShow v
+
+instance EncodeJson EnumValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson EnumValue where 
+  decodeJson a = genericDecodeJson a
 
 derive instance enumValueEq ∷ Eq EnumValue
 
@@ -840,6 +970,11 @@ derive instance listValueGeneric ∷ Generic ListValue _
 instance listValueShow ∷ Show ListValue where
   show v = genericShow v
 
+instance EncodeJson ListValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ListValue where 
+  decodeJson a = genericDecodeJson a
 derive instance listValueEq ∷ Eq ListValue
 
 derive instance listValueOrd ∷ Ord ListValue
@@ -866,6 +1001,12 @@ derive instance objectValueGeneric ∷ Generic ObjectValue _
 
 instance objectValueShow ∷ Show ObjectValue where
   show v = genericShow v
+
+instance EncodeJson ObjectValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ObjectValue where 
+  decodeJson a = genericDecodeJson a
 
 derive instance objectValueEq ∷ Eq ObjectValue
 
@@ -894,6 +1035,12 @@ derive instance variableDefinitionsGeneric ∷ Generic VariableDefinitions _
 instance variableDefinitionsShow ∷ Show VariableDefinitions where
   show v = genericShow v
 
+instance EncodeJson VariableDefinitions where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson VariableDefinitions where 
+  decodeJson a = genericDecodeJson a
+
 derive instance variableDefinitionsEq ∷ Eq VariableDefinitions
 
 derive instance variableDefinitionsOrd ∷ Ord VariableDefinitions
@@ -920,6 +1067,12 @@ derive instance variableDefinitionGeneric ∷ Generic VariableDefinition _
 
 instance variableDefinitionShow ∷ Show VariableDefinition where
   show v = genericShow v
+
+instance EncodeJson VariableDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson VariableDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance variableDefinitionEq ∷ Eq VariableDefinition
 
@@ -951,6 +1104,12 @@ derive instance variableGeneric ∷ Generic Variable _
 instance variableShow ∷ Show Variable where
   show v = genericShow v
 
+instance EncodeJson Variable where 
+  encodeJson a = genericEncodeJson a
+
+instance DecodeJson Variable where 
+  decodeJson a = genericDecodeJson a
+
 derive instance variableEq ∷ Eq Variable
 
 derive instance variableOrd ∷ Ord Variable
@@ -978,6 +1137,12 @@ derive instance defaultValueGeneric ∷ Generic DefaultValue _
 instance defaultValueShow ∷ Show DefaultValue where
   show v = genericShow v
 
+instance EncodeJson DefaultValue where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson DefaultValue where 
+  decodeJson a = genericDecodeJson a
+
 derive instance defaultValueEq ∷ Eq DefaultValue
 
 derive instance defaultValueOrd ∷ Ord DefaultValue
@@ -1004,6 +1169,13 @@ derive instance typeGeneric ∷ Generic Type _
 
 instance typeShow ∷ Show Type where
   show v = genericShow v
+  
+instance EncodeJson Type where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson Type where 
+  decodeJson a = genericDecodeJson a
+
 
 derive instance typeEq ∷ Eq Type
 
@@ -1061,6 +1233,12 @@ derive instance namedTypeGeneric ∷ Generic NamedType _
 instance namedTypeShow ∷ Show NamedType where
   show v = genericShow v
 
+instance EncodeJson NamedType where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson NamedType where 
+  decodeJson a = genericDecodeJson a
+
 derive instance namedTypeEq ∷ Eq NamedType
 
 derive instance namedTypeOrd ∷ Ord NamedType
@@ -1088,6 +1266,12 @@ derive instance listTypeGeneric ∷ Generic ListType _
 instance listTypeShow ∷ Show ListType where
   show v = genericShow v
 
+instance EncodeJson ListType where 
+  encodeJson a = genericEncodeJson a
+
+instance DecodeJson ListType where 
+  decodeJson a = genericDecodeJson a
+
 derive instance listTypeEq ∷ Eq ListType
 
 derive instance listTypeOrd ∷ Ord ListType
@@ -1114,6 +1298,12 @@ derive instance nonNullTypeGeneric ∷ Generic NonNullType _
 
 instance nonNullTypeShow ∷ Show NonNullType where
   show v = genericShow v
+
+instance EncodeJson NonNullType where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson NonNullType where 
+  decodeJson a = genericDecodeJson a
 
 derive instance nonNullTypeEq ∷ Eq NonNullType
 
@@ -1156,6 +1346,12 @@ derive instance directivesGeneric ∷ Generic Directives _
 instance directivesShow ∷ Show Directives where
   show v = genericShow v
 
+instance EncodeJson Directives where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson Directives where 
+  decodeJson a = genericDecodeJson a
+
 derive instance directivesEq ∷ Eq Directives
 
 derive instance directivesOrd ∷ Ord Directives
@@ -1182,6 +1378,12 @@ derive instance directiveGeneric ∷ Generic Directive _
 
 instance directiveShow ∷ Show Directive where
   show v = genericShow v
+
+instance EncodeJson Directive where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson Directive where 
+  decodeJson a = genericDecodeJson a
 
 derive instance directiveEq ∷ Eq Directive
 
@@ -1212,6 +1414,12 @@ derive instance typeSystemDefinitionGeneric ∷ Generic TypeSystemDefinition _
 
 instance typeSystemDefinitionShow ∷ Show TypeSystemDefinition where
   show v = genericShow v
+
+instance EncodeJson TypeSystemDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson TypeSystemDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance typeSystemDefinitionEq ∷ Eq TypeSystemDefinition
 
@@ -1269,6 +1477,12 @@ derive instance typeSystemExtensionGeneric ∷ Generic TypeSystemExtension _
 instance typeSystemExtensionShow ∷ Show TypeSystemExtension where
   show v = genericShow v
 
+instance EncodeJson TypeSystemExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson TypeSystemExtension where 
+  decodeJson a = genericDecodeJson a
+
 derive instance typeSystemExtensionEq ∷ Eq TypeSystemExtension
 
 derive instance typeSystemExtensionOrd ∷ Ord TypeSystemExtension
@@ -1310,6 +1524,12 @@ derive instance schemaDefinitionGeneric ∷ Generic SchemaDefinition _
 instance schemaDefinitionShow ∷ Show SchemaDefinition where
   show v = genericShow v
 
+instance EncodeJson SchemaDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson SchemaDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance schemaDefinitionEq ∷ Eq SchemaDefinition
 
 derive instance schemaDefinitionOrd ∷ Ord SchemaDefinition
@@ -1340,6 +1560,12 @@ derive instance rootOperationTypeDefinitionGeneric ∷ Generic RootOperationType
 instance rootOperationTypeDefinitionShow ∷ Show RootOperationTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson RootOperationTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson RootOperationTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance rootOperationTypeDefinitionEq ∷ Eq RootOperationTypeDefinition
 
 derive instance rootOperationTypeDefinitionOrd ∷ Ord RootOperationTypeDefinition
@@ -1369,6 +1595,12 @@ derive instance schemaExtensionGeneric ∷ Generic SchemaExtension _
 
 instance schemaExtensionShow ∷ Show SchemaExtension where
   show v = genericShow v
+
+instance EncodeJson SchemaExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson SchemaExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance schemaExtensionEq ∷ Eq SchemaExtension
 
@@ -1417,6 +1649,12 @@ derive instance operationTypeDefinitionGeneric ∷ Generic OperationTypeDefiniti
 instance operationTypeDefinitionShow ∷ Show OperationTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson OperationTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson OperationTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance operationTypeDefinitionEq ∷ Eq OperationTypeDefinition
 
 derive instance operationTypeDefinitionOrd ∷ Ord OperationTypeDefinition
@@ -1446,6 +1684,11 @@ derive instance typeDefinitionGeneric ∷ Generic TypeDefinition _
 
 instance typeDefinitionShow ∷ Show TypeDefinition where
   show v = genericShow v
+
+instance EncodeJson TypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+instance DecodeJson TypeDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance typeDefinitionEq ∷ Eq TypeDefinition
 
@@ -1548,6 +1791,12 @@ derive instance typeExtensionGeneric ∷ Generic TypeExtension _
 instance typeExtensionShow ∷ Show TypeExtension where
   show v = genericShow v
 
+instance EncodeJson TypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson TypeExtension where 
+  decodeJson a = genericDecodeJson a
+
 derive instance typeExtensionEq ∷ Eq TypeExtension
 
 derive instance typeExtensionOrd ∷ Ord TypeExtension
@@ -1649,6 +1898,12 @@ derive instance scalarTypeDefinitionGeneric ∷ Generic ScalarTypeDefinition _
 instance scalarTypeDefinitionShow ∷ Show ScalarTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson ScalarTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ScalarTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance scalarTypeDefinitionEq ∷ Eq ScalarTypeDefinition
 
 derive instance scalarTypeDefinitionOrd ∷ Ord ScalarTypeDefinition
@@ -1678,6 +1933,12 @@ derive instance scalarTypeExtensionGeneric ∷ Generic ScalarTypeExtension _
 
 instance scalarTypeExtensionShow ∷ Show ScalarTypeExtension where
   show v = genericShow v
+
+instance EncodeJson ScalarTypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ScalarTypeExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance scalarTypeExtensionEq ∷ Eq ScalarTypeExtension
 
@@ -1709,6 +1970,12 @@ derive instance objectTypeDefinitionGeneric ∷ Generic ObjectTypeDefinition _
 instance objectTypeDefinitionShow ∷ Show ObjectTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson ObjectTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ObjectTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance objectTypeDefinitionEq ∷ Eq ObjectTypeDefinition
 
 derive instance objectTypeDefinitionOrd ∷ Ord ObjectTypeDefinition
@@ -1738,6 +2005,12 @@ derive instance objectTypeExtensionGeneric ∷ Generic ObjectTypeExtension _
 
 instance objectTypeExtensionShow ∷ Show ObjectTypeExtension where
   show v = genericShow v
+
+instance EncodeJson ObjectTypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ObjectTypeExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance objectTypeExtensionEq ∷ Eq ObjectTypeExtension
 
@@ -1804,6 +2077,12 @@ derive instance implementsInterfacesGeneric ∷ Generic ImplementsInterfaces _
 instance implementsInterfacesShow ∷ Show ImplementsInterfaces where
   show v = genericShow v
 
+instance EncodeJson ImplementsInterfaces where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ImplementsInterfaces where 
+  decodeJson a = genericDecodeJson a
+
 derive instance implementsInterfacesEq ∷ Eq ImplementsInterfaces
 
 derive instance implementsInterfacesOrd ∷ Ord ImplementsInterfaces
@@ -1831,6 +2110,12 @@ derive instance fieldsDefinitionGeneric ∷ Generic FieldsDefinition _
 instance fieldsDefinitionShow ∷ Show FieldsDefinition where
   show v = genericShow v
 
+instance EncodeJson FieldsDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson FieldsDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance fieldsDefinitionEq ∷ Eq FieldsDefinition
 
 derive instance fieldsDefinitionOrd ∷ Ord FieldsDefinition
@@ -1857,6 +2142,12 @@ derive instance fieldDefinitionGeneric ∷ Generic FieldDefinition _
 
 instance fieldDefinitionShow ∷ Show FieldDefinition where
   show v = genericShow v
+
+instance EncodeJson FieldDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson FieldDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance fieldDefinitionEq ∷ Eq FieldDefinition
 
@@ -1888,6 +2179,12 @@ derive instance argumentsDefinitionGeneric ∷ Generic ArgumentsDefinition _
 instance argumentsDefinitionShow ∷ Show ArgumentsDefinition where
   show v = genericShow v
 
+instance EncodeJson ArgumentsDefinition where 
+  encodeJson a = genericEncodeJson a 
+instance DecodeJson ArgumentsDefinition where 
+  decodeJson a = genericDecodeJson a
+
+
 derive instance argumentsDefinitionEq ∷ Eq ArgumentsDefinition
 
 derive instance argumentsDefinitionOrd ∷ Ord ArgumentsDefinition
@@ -1914,6 +2211,12 @@ derive instance inputValueDefinitionGeneric ∷ Generic InputValueDefinition _
 
 instance inputValueDefinitionShow ∷ Show InputValueDefinition where
   show v = genericShow v
+
+instance EncodeJson InputValueDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InputValueDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance inputValueDefinitionEq ∷ Eq InputValueDefinition
 
@@ -1945,6 +2248,12 @@ derive instance interfaceTypeDefinitionGeneric ∷ Generic InterfaceTypeDefiniti
 instance interfaceTypeDefinitionShow ∷ Show InterfaceTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson InterfaceTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InterfaceTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance interfaceTypeDefinitionEq ∷ Eq InterfaceTypeDefinition
 
 derive instance interfaceTypeDefinitionOrd ∷ Ord InterfaceTypeDefinition
@@ -1974,6 +2283,12 @@ derive instance interfaceTypeExtensionGeneric ∷ Generic InterfaceTypeExtension
 
 instance interfaceTypeExtensionShow ∷ Show InterfaceTypeExtension where
   show v = genericShow v
+
+instance EncodeJson InterfaceTypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InterfaceTypeExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance interfaceTypeExtensionEq ∷ Eq InterfaceTypeExtension
 
@@ -2022,6 +2337,12 @@ derive instance unionTypeDefinitionGeneric ∷ Generic UnionTypeDefinition _
 instance unionTypeDefinitionShow ∷ Show UnionTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson UnionTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson UnionTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance unionTypeDefinitionEq ∷ Eq UnionTypeDefinition
 
 derive instance unionTypeDefinitionOrd ∷ Ord UnionTypeDefinition
@@ -2052,6 +2373,12 @@ derive instance unionMemberTypesGeneric ∷ Generic UnionMemberTypes _
 instance unionMemberTypesShow ∷ Show UnionMemberTypes where
   show v = genericShow v
 
+instance EncodeJson UnionMemberTypes where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson UnionMemberTypes where 
+  decodeJson a = genericDecodeJson a
+
 derive instance unionMemberTypesEq ∷ Eq UnionMemberTypes
 
 derive instance unionMemberTypesOrd ∷ Ord UnionMemberTypes
@@ -2078,6 +2405,12 @@ derive instance unionTypeExtensionGeneric ∷ Generic UnionTypeExtension _
 
 instance unionTypeExtensionShow ∷ Show UnionTypeExtension where
   show v = genericShow v
+
+instance EncodeJson UnionTypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson UnionTypeExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance unionTypeExtensionEq ∷ Eq UnionTypeExtension
 
@@ -2126,6 +2459,12 @@ derive instance enumTypeDefinitionGeneric ∷ Generic EnumTypeDefinition _
 instance enumTypeDefinitionShow ∷ Show EnumTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson EnumTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson EnumTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance enumTypeDefinitionEq ∷ Eq EnumTypeDefinition
 
 derive instance enumTypeDefinitionOrd ∷ Ord EnumTypeDefinition
@@ -2156,6 +2495,12 @@ derive instance enumValuesDefinitionGeneric ∷ Generic EnumValuesDefinition _
 instance enumValuesDefinitionShow ∷ Show EnumValuesDefinition where
   show v = genericShow v
 
+instance EncodeJson EnumValuesDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson EnumValuesDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance enumValuesDefinitionEq ∷ Eq EnumValuesDefinition
 
 derive instance enumValuesDefinitionOrd ∷ Ord EnumValuesDefinition
@@ -2182,6 +2527,12 @@ derive instance enumValueDefinitionGeneric ∷ Generic EnumValueDefinition _
 
 instance enumValueDefinitionShow ∷ Show EnumValueDefinition where
   show v = genericShow v
+
+instance EncodeJson EnumValueDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson EnumValueDefinition where 
+  decodeJson a = genericDecodeJson a
 
 derive instance enumValueDefinitionEq ∷ Eq EnumValueDefinition
 
@@ -2212,6 +2563,12 @@ derive instance enumTypeExtensionGeneric ∷ Generic EnumTypeExtension _
 
 instance enumTypeExtensionShow ∷ Show EnumTypeExtension where
   show v = genericShow v
+
+instance EncodeJson EnumTypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson EnumTypeExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance enumTypeExtensionEq ∷ Eq EnumTypeExtension
 
@@ -2260,6 +2617,12 @@ derive instance inputObjectTypeDefinitionGeneric ∷ Generic InputObjectTypeDefi
 instance inputObjectTypeDefinitionShow ∷ Show InputObjectTypeDefinition where
   show v = genericShow v
 
+instance EncodeJson InputObjectTypeDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InputObjectTypeDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance inputObjectTypeDefinitionEq ∷ Eq InputObjectTypeDefinition
 
 derive instance inputObjectTypeDefinitionOrd ∷ Ord InputObjectTypeDefinition
@@ -2290,6 +2653,12 @@ derive instance inputFieldsDefinitionGeneric ∷ Generic InputFieldsDefinition _
 instance inputFieldsDefinitionShow ∷ Show InputFieldsDefinition where
   show v = genericShow v
 
+instance EncodeJson InputFieldsDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InputFieldsDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance inputFieldsDefinitionEq ∷ Eq InputFieldsDefinition
 
 derive instance inputFieldsDefinitionOrd ∷ Ord InputFieldsDefinition
@@ -2316,6 +2685,12 @@ derive instance inputObjectTypeExtensionGeneric ∷ Generic InputObjectTypeExten
 
 instance inputObjectTypeExtensionShow ∷ Show InputObjectTypeExtension where
   show v = genericShow v
+
+instance EncodeJson InputObjectTypeExtension where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson InputObjectTypeExtension where 
+  decodeJson a = genericDecodeJson a
 
 derive instance inputObjectTypeExtensionEq ∷ Eq InputObjectTypeExtension
 
@@ -2364,6 +2739,12 @@ derive instance directiveDefinitionGeneric ∷ Generic DirectiveDefinition _
 instance directiveDefinitionShow ∷ Show DirectiveDefinition where
   show v = genericShow v
 
+instance EncodeJson DirectiveDefinition where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson DirectiveDefinition where 
+  decodeJson a = genericDecodeJson a
+
 derive instance directiveDefinitionEq ∷ Eq DirectiveDefinition
 
 derive instance directiveDefinitionOrd ∷ Ord DirectiveDefinition
@@ -2394,6 +2775,12 @@ derive instance directiveLocationsGeneric ∷ Generic DirectiveLocations _
 instance directiveLocationsShow ∷ Show DirectiveLocations where
   show v = genericShow v
 
+instance EncodeJson DirectiveLocations where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson DirectiveLocations where 
+  decodeJson a = genericDecodeJson a
+
 derive instance directiveLocationsEq ∷ Eq DirectiveLocations
 
 derive instance directiveLocationsOrd ∷ Ord DirectiveLocations
@@ -2420,6 +2807,12 @@ derive instance directiveLocationGeneric ∷ Generic DirectiveLocation _
 
 instance directiveLocationShow ∷ Show DirectiveLocation where
   show v = genericShow v
+
+instance EncodeJson DirectiveLocation where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson DirectiveLocation where 
+  decodeJson a = genericDecodeJson a
 
 derive instance directiveLocationEq ∷ Eq DirectiveLocation
 
@@ -2461,6 +2854,12 @@ derive instance executableDirectiveLocationGeneric ∷ Generic ExecutableDirecti
 
 instance executableDirectiveLocationShow ∷ Show ExecutableDirectiveLocation where
   show v = genericShow v
+
+instance EncodeJson ExecutableDirectiveLocation where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson ExecutableDirectiveLocation where 
+  decodeJson a = genericDecodeJson a
 
 derive instance executableDirectiveLocationEq ∷ Eq ExecutableDirectiveLocation
 
@@ -2577,6 +2976,12 @@ derive instance typeSystemDirectiveLocationGeneric ∷ Generic TypeSystemDirecti
 
 instance typeSystemDirectiveLocationShow ∷ Show TypeSystemDirectiveLocation where
   show v = genericShow v
+
+instance EncodeJson TypeSystemDirectiveLocation where 
+  encodeJson a = genericEncodeJson a 
+
+instance DecodeJson TypeSystemDirectiveLocation where 
+  decodeJson a = genericDecodeJson a
 
 derive instance typeSystemDirectiveLocationEq ∷ Eq TypeSystemDirectiveLocation
 

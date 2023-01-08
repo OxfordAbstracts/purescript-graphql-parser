@@ -7,6 +7,8 @@ You can edit this file as you like.
 , license = "Apache-2.0"
 , dependencies =
   [ "aff"
+  , "argonaut-codecs"
+  , "argonaut-generic"
   , "arrays"
   , "console"
   , "control"
